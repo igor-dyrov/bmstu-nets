@@ -29,6 +29,7 @@ func main() {
 	if err != nil {
 
 		log.Fatal("wrong login/password\n")
+		return
 
 	}
 
@@ -108,6 +109,9 @@ func main() {
 					file.Close()
 				} 
 			}
+
+		case "exit": 
+			return
 		}
 	}
 }
