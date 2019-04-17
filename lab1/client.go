@@ -18,7 +18,7 @@ func CheckErr(err error) {
 
 func main() {
 
-	connection, err := ftp.Connect("localhost:2121")
+	connection, err := ftp.Connect("185.20.227.83:2107")
 
 	if err != nil {
 		log.Fatal("wrong adress\n")

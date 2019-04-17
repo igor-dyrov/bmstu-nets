@@ -20,7 +20,7 @@ func main() {
 	flag.Parse()
 
 	config := &ssh.ClientConfig{
-		User: "iu8_81_07",
+		User: *user,
 		Auth: []ssh.AuthMethod{ssh.Password(*password)},
 	}
 	config.HostKeyCallback = ssh.InsecureIgnoreHostKey()
