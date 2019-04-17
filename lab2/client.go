@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"flag"
 	"fmt"
 
@@ -11,6 +12,7 @@ var (
 	user     = flag.String("u", "", "user")
 	password = flag.String("p", "", "Password")
 	host     = flag.String("host", "185.20.227.83", "Host")
+	command  = flag.String("cmd", "", "Command")
 	port     = flag.Int("port", 22, "Port")
 )
 
@@ -35,9 +37,10 @@ func main() {
 	}
 	defer session.Close()
 
-	b, err := session.CombinedOutput("uname -a")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Print(string(b))
+	var stdoutBuf bytes.Buffer
+	session.Stdout = &stdoutBuf
+
+	session.Run(*command)
+	fmt.Print(stdoutBuf.String())
+	stdoutBuf.Reset()
 }
