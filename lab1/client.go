@@ -18,13 +18,13 @@ func CheckErr(err error) {
 
 func main() {
 
-	connection, err := ftp.Connect("students.yss.su:21")
+	connection, err := ftp.Connect("localhost:2121")
 
 	if err != nil {
 		log.Fatal("wrong adress\n")
 	}
 
-	err = connection.Login("ftpiu8", "3Ru7yOTA")
+	err = connection.Login("admin", "123456")
 
 	if err != nil {
 
