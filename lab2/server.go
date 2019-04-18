@@ -1,28 +1,18 @@
 package main
 
 import (
-	// "fmt"
-	"os"
-	"strings"
-	"os/exec"
-	// "io"
+	"fmt"
 	"log"
+	"os"
+	"os/exec"
+	"strings"
 
 	"github.com/gliderlabs/ssh"
 	"golang.org/x/crypto/ssh/terminal"
-	// ssh2 "golang.org/x/crypto/ssh"
 )
 
 func main() {
-	// config := &ssh2.ServerConfig{
-	// 	User: "igor",
-	// 	Auth: []ssh.AuthMethod{ssh.Password("261097")},
-	// }
-
 	ssh.Handle(func(s ssh.Session) {
-
-		// io.WriteString(s, fmt.Sprintf("Hello %s\n", s.User()))
-
 		term := terminal.NewTerminal(s, "> ")
 		for {
 			input, _ := term.ReadLine()
@@ -31,8 +21,8 @@ func main() {
 			}
 			arguments := strings.Split(input, " ")
 			var cmd *exec.Cmd
-			if (len(arguments) > 1) {
-				cmd = exec.Command(arguments[0], arguments[1 : len(arguments)]...)
+			if len(arguments) > 1 {
+				cmd = exec.Command(arguments[0], arguments[1:len(arguments)]...)
 			} else {
 				cmd = exec.Command(arguments[0])
 			}
@@ -40,7 +30,7 @@ func main() {
 			cmd.Stdin = os.Stdin
 			cmd.Stderr = os.Stderr
 			cmd.Run()
-			// fmt.Println([]byte(line))
+			fmt.Println([]byte(input))
 		}
 		log.Println("terminal closed")
 	})
