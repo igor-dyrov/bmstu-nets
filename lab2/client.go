@@ -11,7 +11,7 @@ import (
 var (
 	user     = flag.String("u", "", "user")
 	password = flag.String("p", "", "Password")
-	host     = flag.String("host", "185.20.227.83", "Host")
+	host     = flag.String("host", "localhost", "Host")
 	command  = flag.String("cmd", "", "Command")
 	port     = flag.Int("port", 22, "Port")
 )
