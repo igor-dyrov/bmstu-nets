@@ -30,11 +30,15 @@ func main() {
 			cmd.Stdin = os.Stdin
 			cmd.Stderr = os.Stderr
 			cmd.Run()
-			fmt.Println([]byte(input))
+			if len(input) > 0 {
+				fmt.Println([]byte(input))
+			}
 		}
 		log.Println("terminal closed")
 	})
 
 	log.Println("starting ssh server on port 2207...")
-	log.Fatal(ssh.ListenAndServe(":2207", nil))
+	log.Fatal(ssh.ListenAndServe(":2207", nil, ssh.PasswordAuth(func(ctx ssh.Context, pass string) bool {
+		return pass == "secret"
+	})))
 }
